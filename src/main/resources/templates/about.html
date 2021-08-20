@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>About Donald S. Leung</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<header id="header">
+				<a href="/" class="title">Donald S. Leung</a>
+				<nav th:include="fragments :: menu"></nav>
+			</header>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<section id="main" class="wrapper">
+						<div class="inner">
+							<h1 class="major">About Me</h1>
+							<p>I perform IT-related workplace duties during the day, but my passion resides in open-source software development.</p>
+							<p>I've dabbled in many programming languages and a few frameworks over the years since I started programming around 2015, but my current skillset can be summarized as follows:</p>
+							<ul>
+							  <li><strong>Node.js</strong> backend development, especially services involving <strong>RESTful APIs</strong></li>
+							  <li><strong>Linux</strong> administration and application development</li>
+							</ul>
+							<p>I'm currently (as of August 2021) picking up <strong>Java Spring Framework</strong> but am still in the early stages of exploration - in fact, this website is powered by Spring and represents my first step towards learning it. Hopefully I can earn a Spring-related certification in time.</p>
+							<p>My currently featured mini-projects are as follows.</p>
+							<h3>csnaketerm</h3>
+							<p>A <span title="terminal user interface">TUI</span> implementation of the classic Snake arcade game for Unix/Linux written in Node.js. Features 3 game maps and 4 difficulty levels per map. Windows users can also play the game through <span title="Windows Subsystem for Linux">WSL</span>.</p>
+							<p><a class="button" href="https://donaldkellett.github.io/csnaketerm" target="_blank"><i class="icon fa fa-file fa-lg"></i> Project page</a> <a class="button" href="https://github.com/DonaldKellett/csnaketerm" target="_blank"><i class="icon brands fa-github fa-lg"></i> Source code</a></p>
+							<h3>ruboxer</h3>
+							<p>An educational command-line tool written in Rust demonstrating Linux kernel features and syscalls powering container runtimes such as Docker. Not suitable for production.</p>
+							<p><a class="button" href="https://dev.to/donaldsebleung/containers-from-first-principles-with-rust-2211" target="_blank"><i class="icon fa fa-file fa-lg"></i> Read the blog post</a> <a class="button" href="https://github.com/DonaldKellett/ruboxer" target="_blank"><i class="icon brands fa-github fa-lg"></i> Get the source code</a></p>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper alt">
+				<div class="inner">
+					<ul class="menu" th:include="fragments :: copyright"></ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

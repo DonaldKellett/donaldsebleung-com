@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Fragments</title>
+  </head>
+  <body>
+    <div th:fragment="menu">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About me</a></li>
+      </ul>
+    </div>
+    <div th:fragment="copyright">
+      <li>&copy; Donald Sebastian Leung. All rights reserved.</li><li>Design: <a href="http://html5up.net" target="_blank">HTML5 UP</a></li>
+    </div>
+  </body>
+</html>
