@@ -11,6 +11,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+		.validationError { color: red }
+		</style>
 	</head>
 	<body class="is-preload">
 
@@ -31,7 +34,41 @@
 							<p>If you would like to contact me by email, please scroll to the bottom of this page and click on one of the three icons, which should open your email client of choice and set the recipient address to the corresponding email account.</p>
 							<p>There <em>is</em> an email form at the middle of this page, which I only implemented to practice my Spring skills. It uses an unauthenticated, unreliable email delivery method that does <em>not</em> guarantee successful delivery to my inbox. Do not use it. I repeat, <strong>do not use it</strong>.</p>
 							<p><em>You've been warned.</em></p>
-							<!-- TODO: add contact form -->
+							<form method="post" th:action="@{/contact}" th:object="${contact}">
+								<div class="row gtr-uniform">
+									<div class="col-6 col-12-xsmall">
+										<input type="text" th:field="*{name}" placeholder="Name" />
+									</div>
+									<div class="col-6 col-12-xsmall">
+										<input type="email" th:field="*{email}" placeholder="Email" />
+									</div>
+									<div class="col-12">
+										<select th:field="*{category}">
+											<option th:value="${null}">- Category -</option>
+											<option th:value="${personal}">Personal</option>
+											<option th:value="${academic}">Academic</option>
+											<option th:value="${professional}">Professional</option>
+										</select>
+									</div>
+									<div class="col-12">
+										<textarea th:field="*{message}" placeholder="Enter your message" rows="6"></textarea>
+									</div>
+									<div class="col-12">
+										<ul class="actions">
+											<li><input type="submit" value="Send Message" class="primary" /></li>
+											<li><input type="reset" value="Reset" /></li>
+										</ul>
+									</div>
+									<div class="col-12">
+										<ul class="validationError">
+											<li th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</li>
+											<li th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</li>
+											<li th:if="${#fields.hasErrors('category')}" th:errors="*{category}">Category Error</li>
+											<li th:if="${#fields.hasErrors('message')}" th:errors="*{message}">Message Error</li>
+										</ul>
+									</div>
+								</div>
+							</form>
 							<ul class="icons">
 							  <li><a href="mailto:donaldsebleung@gmail.com" class="icon brands fa-google fa-lg"><span class="label">Gmail</span></a></li>
 							  <li><a href="mailto:donaldseb.leung@alumni.ust.hk" class="fa fa-graduation-cap fa-lg"><span class="label">Microsoft Outlook (HKUST)</span></a></li>
