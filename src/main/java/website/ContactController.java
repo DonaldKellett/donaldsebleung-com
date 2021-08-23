@@ -1,5 +1,8 @@
 package website;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,19 @@ import org.springframework.web.bind.support.SessionStatus;
 @SessionAttributes({"personal", "academic", "professional"})
 public class ContactController {
 	
+	private String categoryToEmail(Category category) {
+		switch (category) {
+		case PERSONAL:
+			return "donaldsebleung@gmail.com";
+		case ACADEMIC:
+			return "donaldseb.leung@alumni.ust.hk";
+		case PROFESSIONAL:
+			return "donaldleung@cre.com.hk";
+		default:
+			return null;
+		}
+	}
+	
 	@GetMapping
 	public String showContactForm(Model model) {
 		model.addAttribute("personal", Category.PERSONAL);
@@ -30,8 +46,11 @@ public class ContactController {
 		if (errors.hasErrors()) {
 			return "contact";
 		}
-		// TODO: send the email
 		sessionStatus.setComplete();
-		return "redirect:/";
+		String mailtoUrl = "mailto:" + categoryToEmail(contact.getCategory()) +
+				"?subject=" + URLEncoder.encode("Private message from " + contact.getName() +
+						" <" + contact.getEmail() + ">", StandardCharsets.UTF_8) +
+				"&body=" + URLEncoder.encode(contact.getMessage(), StandardCharsets.UTF_8);
+		return "redirect:" + mailtoUrl;
 	}
 }
