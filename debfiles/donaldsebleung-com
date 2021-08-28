@@ -1,0 +1,56 @@
+#!/bin/bash
+
+print_usage() {
+  echo "Usage: donaldsebleung-com [--version]"
+}
+
+miss_keycert() {
+  echo "Missing key-certificate pair:"
+  echo "/etc/donaldsebleung-com/key.pem"
+  echo "/etc/donaldsebleung-com/cert.pem"
+}
+
+if [[ $# -gt 1 ]]; then
+  print_usage
+  exit 1
+fi
+
+if [[ $# -eq 0 ]]; then
+  if [[ "$(whoami)" != root ]]; then
+    echo "donaldsebleung-com must be run as root when invoked with no arguments"
+    exit 1
+  fi
+  test -f /etc/donaldsebleung-com/key.pem
+  if [[ $? -ne 0 ]]; then
+    miss_keycert
+    exit 1
+  fi
+  test -f /etc/donaldsebleung-com/cert.pem
+  if [[ $? -ne 0 ]]; then
+    miss_keycert
+    exit 1
+  fi
+  test -f /etc/donaldsebleung-com/passwd
+  if [[ $? -ne 0 ]]; then
+    echo "Missing password file /etc/donaldsebleung-com/passwd"
+    exit 1
+  fi
+  test -f /etc/donaldsebleung-com/keyalias
+  if [[ $? -ne 0 ]]; then
+    echo "Missing key alias file /etc/donaldsebleung-com/keyalias"
+    exit 1
+  fi
+  TMP_DIR=$(mktemp -d)
+  cat /etc/donaldsebleung-com/key.pem /etc/donaldsebleung-com/cert.pem > $TMP_DIR/keycert.pem
+  openssl pkcs12 -export -in $TMP_DIR/keycert.pem -out $TMP_DIR/keystore.pkcs12 -name $(cat /etc/donaldsebleung-com/keyalias) -noiter -nomaciter -passin pass:"$(cat /etc/donaldsebleung-com/passwd)" -passout pass:"$(cat /etc/donaldsebleung-com/passwd)"
+  SPRING_PROFILES_ACTIVE=prod SERVER_SSL_KEY_STORE=file://$TMP_DIR/keystore.pkcs12 SERVER_SSL_KEY_STORE_PASSWORD=$(cat /etc/donaldsebleung-com/passwd) SERVER_SSL_KEY_ALIAS=$(cat /etc/donaldsebleung-com/keyalias) java -jar /usr/share/donaldsebleung-com/personal-website-0.0.1-SNAPSHOT.jar
+  exit
+fi
+
+if [[ "$1" == --version ]]; then
+  echo "0.1.0"
+  exit
+fi
+
+print_usage
+exit 1
