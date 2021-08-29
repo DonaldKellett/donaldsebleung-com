@@ -2,6 +2,31 @@ My personal website reinstated, this time written in Spring
 
 ## Installing
 
+### From the Snap store
+
+Applicable to Ubuntu and many other Linux distributions
+
+Ensure `snapd` is [installed on your system](https://snapcraft.io/docs/installing-snapd), then install `donaldsebleung-com` [from the Snap store](https://snapcraft.io/donaldsebleung-com).
+
+Next, run the following commands to make your CA-issued (or self-signed) key-certificate pair available to `donaldsebleung-com`:
+
+```bash
+$ sudo donaldsebleung-com install-key < /path/to/your/key.pem
+$ sudo donaldsebleung-com install-cert < /path/to/your/cert.pem
+```
+
+If your private key is protected by a passphrase `<passphrase>`, run the following command to make `donaldsebleung-com` aware of it:
+
+```bash
+$ sudo donaldsebleung-com set-passwd <passphrase>
+```
+
+Finally, enable the service `snap.donaldsebleung-com.donaldsebleung-comd.service` to run at boot:
+
+```bash
+$ sudo systemctl enable --now snap.donaldsebleung-com.donaldsebleung-comd.service
+```
+
 ### From Fedora COPR
 
 Applicable to:
