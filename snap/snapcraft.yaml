@@ -1,0 +1,44 @@
+name: donaldsebleung-com
+base: core18
+version: '0.1.0'
+summary: My personal website reinstated, this time written in Spring
+description: |
+  My personal website reinstated, this time written in Spring
+
+grade: stable
+confinement: strict
+
+apps:
+  donaldsebleung-com:
+    command: bin/donaldsebleung-com
+    plugs:
+      - network-bind
+  donaldsebleung-comd:
+    command: bin/donaldsebleung-com start-service
+    daemon: simple
+    install-mode: disable
+    plugs:
+      - network-bind
+
+parts:
+  entry:
+    plugin: dump
+    source: snapfiles/
+    source-type: local
+    organize:
+      donaldsebleung-com: bin/
+  donaldsebleung-com:
+    plugin: maven
+    source: https://github.com/DonaldKellett/donaldsebleung-com/archive/refs/tags/v0.1.0.tar.gz
+  whoami:
+    plugin: nil
+    stage-packages:
+      - coreutils
+    stage:
+      - usr/bin/whoami
+  openssl:
+    plugin: nil
+    stage-packages:
+      - openssl
+    stage:
+      - usr/bin/openssl

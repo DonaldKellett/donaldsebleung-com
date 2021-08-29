@@ -1,0 +1,132 @@
+#!/bin/bash
+
+print_usage() {
+  echo "Usage: donaldsebleung-com <command> [args...]"
+  echo "  where command can be one of:"
+  echo "    get-version"
+  echo "    install-key"
+  echo "    install-cert"
+  echo "    set-passwd"
+  echo "    set-keyalias"
+  echo "    start-service"
+  echo ""
+  echo "Examples:"
+  echo "  Getting the version:"
+  echo "  $ donaldsebleung-com get-version"
+  echo "  Installing key-certificate pair:"
+  echo "  $ donaldsebleung-com install-key < /path/to/your/key.pem"
+  echo "  $ donaldsebleung-com install-cert < /path/to/your/cert.pem"
+  echo "  Setting the key passphrase to MyP@ssw0rd:"
+  echo "  $ donaldsebleung-com set-passwd \"MyP@ssw0rd\""
+  echo "  Setting the key alias to myalias:"
+  echo "  $ donaldsebleung-com set-keyalias \"myalias\""
+  echo "  Starting the HTTPS server (binds to TCP port 443):"
+  echo "  $ donaldsebleung-com start-service"
+}
+
+miss_keycert() {
+  echo "Missing key-certificate pair!"
+  echo "Ensure you have installed your CA-issued or self-signed key-certificate pair by running the following commands:"
+  echo "$ donaldsebleung-com install-key < /path/to/your/key.pem"
+  echo "$ donaldsebleung-com install-cert < /path/to/your/cert.pem"
+  echo "If your key is protected by a passphrase, remember to set the password as well:"
+  echo "$ donaldsebleung-com set-passwd <passphrase>"
+}
+
+if [[ $# -lt 1 || $# -gt 2 ]]; then
+  print_usage
+  exit 1
+fi
+
+if [[ $# -eq 2 ]]; then
+  case $1 in
+    set-passwd)
+      if [[ "$(whoami)" != root ]]; then
+        echo "Command set-passwd must be run as root"
+        exit 1
+      fi
+      mkdir -p $SNAP_DATA/config
+      echo "$2" > $SNAP_DATA/config/passwd
+      chmod 600 $SNAP_DATA/config/passwd
+      exit
+      ;;
+    set-keyalias)
+      if [[ "$(whoami)" != root ]]; then
+        echo "Command set-keyalias must be run as root"
+        exit 1
+      fi
+      mkdir -p $SNAP_DATA/config
+      echo "$2" > $SNAP_DATA/config/keyalias
+      exit
+      ;;
+    *)
+      print_usage
+      exit 1
+      ;;
+  esac
+fi
+
+case $1 in
+  get-version)
+    echo "0.1.0"
+    exit
+    ;;
+  install-key)
+    if [[ "$(whoami)" != root ]]; then
+      echo "Command install-key must be run as root"
+      exit 1
+    fi
+    mkdir -p $SNAP_DATA/config
+    rm -f $SNAP_DATA/config/key.pem
+    while IFS= read -r line; do
+      echo "$line" >> $SNAP_DATA/config/key.pem
+    done
+    exit
+    ;;
+  install-cert)
+    if [[ "$(whoami)" != root ]]; then
+      echo "Command install-cert must be run as root"
+      exit 1
+    fi
+    mkdir -p $SNAP_DATA/config
+    rm -f $SNAP_DATA/config/cert.pem
+    while IFS= read -r line; do
+      echo "$line" >> $SNAP_DATA/config/cert.pem
+    done
+    exit
+    ;;
+  start-service)
+    if [[ "$(whoami)" != root ]]; then
+      echo "Command start-service must be run as root"
+      exit 1
+    fi
+    test -f $SNAP_DATA/config/key.pem
+    if [[ $? -ne 0 ]]; then
+      miss_keycert
+      exit 1
+    fi
+    test -f $SNAP_DATA/config/cert.pem
+    if [[ $? -ne 0 ]]; then
+      miss_keycert
+      exit 1
+    fi
+    test -f $SNAP_DATA/config/passwd
+    if [[ $? -ne 0 ]]; then
+      echo "P@ssw0rd" > $SNAP_DATA/config/passwd
+      chmod 600 $SNAP_DATA/config/passwd
+    fi
+    test -f $SNAP_DATA/config/keyalias
+    if [[ $? -ne 0 ]]; then
+      echo "keyalias" > $SNAP_DATA/config/keyalias
+    fi
+    TMP_DIR=$(mktemp -d)
+    cat $SNAP_DATA/config/key.pem $SNAP_DATA/config/cert.pem > $TMP_DIR/keycert.pem
+    openssl pkcs12 -export -in $TMP_DIR/keycert.pem -out $TMP_DIR/keystore.pkcs12 -name "$(cat $SNAP_DATA/config/keyalias)" -noiter -nomaciter -passin pass:"$(cat $SNAP_DATA/config/passwd)" -passout pass:"$(cat $SNAP_DATA/config/passwd)"
+    SPRING_PROFILES_ACTIVE=prod SERVER_SSL_KEY_STORE=file://$TMP_DIR/keystore.pkcs12 SERVER_SSL_KEY_STORE_PASSWORD="$(cat $SNAP_DATA/config/passwd)" SERVER_SSL_KEY_ALIAS="$(cat $SNAP_DATA/config/keyalias)" java -jar $SNAP/jar/personal-website-0.0.1-SNAPSHOT.jar
+    exit
+    ;;
+  *)
+    print_usage
+    exit 1
+    ;;
+esac
