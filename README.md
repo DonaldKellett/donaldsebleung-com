@@ -2,6 +2,38 @@ My personal website reinstated, this time written in Spring
 
 ## Installing
 
+### With Homebrew
+
+Applicable to macOS and Linux
+
+macOS users, here is your chance to contribute by [testing the formula](https://github.com/DonaldKellett/homebrew-misc/issues/2) ;-)
+
+Ensure [Homebrew](https://brew.sh) is installed on your system and up to date, then add the DonaldKellett/misc tap and install the formula donaldsebleung-com:
+
+```bash
+$ brew tap DonaldKellett/misc
+$ brew install donaldsebleung-com
+```
+
+Next, run the following commands to make your CA-issued (or self-signed) key-certificate pair available to `donaldsebleung-com`:
+
+```bash
+$ donaldsebleung-com install-key < /path/to/your/key.pem
+$ donaldsebleung-com install-cert < /path/to/your/cert.pem
+```
+
+If your private key is protected by a passphrase `<passphrase>`, run the following command to make `donaldsebleung-com` aware of it:
+
+```bash
+$ donaldsebleung-com set-passwd "<passphrase>"
+```
+
+Finally, invoke the start-service command as root to spin up the HTTPS server which can be accessed through https://localhost :
+
+```bash
+$ sudo donaldsebleung-com start-service
+```
+
 ### From the Snap store
 
 Applicable to Ubuntu and many other Linux distributions
@@ -18,7 +50,7 @@ $ sudo donaldsebleung-com install-cert < /path/to/your/cert.pem
 If your private key is protected by a passphrase `<passphrase>`, run the following command to make `donaldsebleung-com` aware of it:
 
 ```bash
-$ sudo donaldsebleung-com set-passwd <passphrase>
+$ sudo donaldsebleung-com set-passwd "<passphrase>"
 ```
 
 Finally, enable the service `snap.donaldsebleung-com.donaldsebleung-comd.service` to run at boot:
