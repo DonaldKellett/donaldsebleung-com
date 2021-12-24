@@ -112,6 +112,39 @@ If your private key is protected by a passphrase, edit `/etc/donaldsebleung-com/
 $ sudo systemctl enable --now donaldsebleung-com.service
 ```
 
+### From source
+
+Applicable to any OS platform supporting Java 8 or later
+
+Ensure that Java 8 or later is installed (ideally Java 11 or later) and that the `JAVA_HOME` variable is set correctly. Furthermore, ensure Git is installed. Then, in a terminal or command prompt:
+
+```bash
+$ git clone https://github.com/DonaldKellett/donaldsebleung-com.git
+$ cd donaldsebleung-com
+```
+
+Now you can run the project with (replace `mvnw` with `mvnw.cmd` if on Windows):
+
+```bash
+$ ./mvnw spring-boot:run
+```
+
+Point your browser to https://localhost:8443 to see the result. Note that your browser may block the site due to the use of a self-signed certificate. In this case, it should be safe to ignore the warning and proceed with visiting the site.
+
+Alternatively, you could package the project with (again, replace `mvnw` with `mvnw.cmd` if on Windows):
+
+```bash
+$ ./mvnw package
+```
+
+This creates a Java archive at `target/personal-website-0.0.1-SNAPSHOT.jar` which can be run with:
+
+```bash
+$ java -jar target/personal-website-0.0.1-SNAPSHOT.jar
+```
+
+For convenience, you may wish to move the JAR elsewhere.
+
 ## Credits
 
 The front-end design is based on [Hyperspace](https://html5up.net/hyperspace) by [HTML5 UP](https://html5up.net), released under the [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) license.

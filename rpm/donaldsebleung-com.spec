@@ -1,5 +1,5 @@
 %global appname donaldsebleung-com
-%global version 0.1.0
+%global version 0.2.0
 
 Name: %{appname}
 Version: %{version}
@@ -108,5 +108,7 @@ EOF
 /usr/lib/systemd/system/%{appname}.service
 
 %changelog
+* Fri Dec 24 2021 Donald Sebastian Leung <donaldsebleung@gmail.com> - 0.2.0-1
+- Update website content to include new qualifications and reflect changes in professional interest
 * Sat Aug 28 2021 Donald Sebastian Leung <donaldsebleung@gmail.com> - 0.1.0-1
 - Initial release
