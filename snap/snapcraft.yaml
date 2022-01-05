@@ -1,6 +1,6 @@
 name: donaldsebleung-com
 base: core18
-version: '0.2.0'
+version: '0.2.1'
 summary: My personal website reinstated, this time written in Spring
 description: |
   My personal website reinstated, this time written in Spring
@@ -29,7 +29,7 @@ parts:
       donaldsebleung-com: bin/
   donaldsebleung-com:
     plugin: maven
-    source: https://github.com/DonaldKellett/donaldsebleung-com/archive/refs/tags/v0.2.0.tar.gz
+    source: https://github.com/DonaldKellett/donaldsebleung-com/archive/refs/tags/v0.2.1.tar.gz
   whoami:
     plugin: nil
     stage-packages:

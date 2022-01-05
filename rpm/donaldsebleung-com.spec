@@ -1,5 +1,5 @@
 %global appname donaldsebleung-com
-%global version 0.2.0
+%global version 0.2.1
 
 Name: %{appname}
 Version: %{version}
@@ -108,6 +108,9 @@ EOF
 /usr/lib/systemd/system/%{appname}.service
 
 %changelog
+* Wed Jan 05 2022 Donald Sebastian Leung <donaldsebleung@gmail.com> - 0.2.1-1
+- Update slogan on home page to reflect current conditions
+- Add links to recent articles on cloud computing and associated resources
 * Fri Dec 24 2021 Donald Sebastian Leung <donaldsebleung@gmail.com> - 0.2.0-1
 - Update website content to include new qualifications and reflect changes in professional interest
 * Sat Aug 28 2021 Donald Sebastian Leung <donaldsebleung@gmail.com> - 0.1.0-1

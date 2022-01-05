@@ -1,3 +1,9 @@
+donaldsebleung-com (0.2.1-1) focal; urgency=medium
+
+  * Update slogan on home page to reflect current conditions
+  * Add links to recent articles on cloud computing and associated resources
+
+ -- Donald Sebastian Leung <donaldsebleung@gmail.com>  Wed, 05 Jan 2022 21:38:00 +0000
 donaldsebleung-com (0.2.0-1) focal; urgency=medium
 
   * Update website content to include new qualifications and reflect changes
