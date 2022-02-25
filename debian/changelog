@@ -1,3 +1,10 @@
+donaldsebleung-com (0.2.2-1) focal; urgency=medium
+
+  * Update About and Qualifications pages to include Alibaba Cloud
+    certifications
+  * Fix typo "OpenFaas" to "OpenFaaS"
+
+ -- Donald Sebastian Leung <donaldsebleung@gmail.com>  Fri, 25 Feb 2022 22:08:00 +0000
 donaldsebleung-com (0.2.1-1) focal; urgency=medium
 
   * Update slogan on home page to reflect current conditions

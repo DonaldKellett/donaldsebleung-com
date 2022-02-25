@@ -1,5 +1,5 @@
 %global appname donaldsebleung-com
-%global version 0.2.1
+%global version 0.2.2
 
 Name: %{appname}
 Version: %{version}
@@ -108,6 +108,9 @@ EOF
 /usr/lib/systemd/system/%{appname}.service
 
 %changelog
+* Fri Feb 25 2022 Donald Sebastian Leung <donaldsebleung@gmail.com> - 0.2.2-1
+- Update About and Qualifications pages to include Alibaba Cloud certifications
+- Fix typo "OpenFaas" to "OpenFaaS"
 * Wed Jan 05 2022 Donald Sebastian Leung <donaldsebleung@gmail.com> - 0.2.1-1
 - Update slogan on home page to reflect current conditions
 - Add links to recent articles on cloud computing and associated resources
