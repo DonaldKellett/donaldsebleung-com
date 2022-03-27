@@ -30,6 +30,9 @@ parts:
   donaldsebleung-com:
     plugin: maven
     source: https://github.com/DonaldKellett/donaldsebleung-com/archive/refs/tags/v0.2.3.tar.gz
+    override-prime: |
+      snapcraftctl prime
+      rm -vf usr/lib/jvm/java-11-openjdk-*/lib/security/blacklisted.certs
   whoami:
     plugin: nil
     stage-packages:
