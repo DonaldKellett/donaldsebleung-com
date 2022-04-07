@@ -1,5 +1,5 @@
 %global appname donaldsebleung-com
-%global version 0.2.3
+%global version 0.2.4
 
 Name: %{appname}
 Version: %{version}
@@ -108,6 +108,8 @@ EOF
 /usr/lib/systemd/system/%{appname}.service
 
 %changelog
+* Thu Apr 07 2022 Donald Sebastian Leung <donaldsebleung@gmail.com> - 0.2.4-1
+- Update About and Qualifications pages to include CKAD certification
 * Sun Mar 27 2022 Donald Sebastian Leung <donaldsebleung@gmail.com> - 0.2.3-1
 - Update About and Qualifications pages to include CKA certification
 * Fri Feb 25 2022 Donald Sebastian Leung <donaldsebleung@gmail.com> - 0.2.2-1

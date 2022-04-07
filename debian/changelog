@@ -1,3 +1,8 @@
+donaldsebleung-com (0.2.4-1) focal; urgency=medium
+
+  * Update About and Qualifications pages to include CKAD certification
+
+ -- Donald Sebastian Leung <donaldsebleung@gmail.com>  Thu, 07 Apr 2022 21:35:00 +0000
 donaldsebleung-com (0.2.3-1) focal; urgency=medium
 
   * Update About and Qualifications pages to include CKA certification
