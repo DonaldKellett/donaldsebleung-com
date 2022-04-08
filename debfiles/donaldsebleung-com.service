@@ -1,8 +1,0 @@
-[Unit]
-Description=My personal website reinstated, this time written in Spring
-
-[Service]
-ExecStart=/usr/bin/donaldsebleung-com
-
-[Install]
-WantedBy=multi-user.target

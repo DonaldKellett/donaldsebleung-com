@@ -1,6 +1,0 @@
-target/personal-website-0.0.1-SNAPSHOT.jar usr/share/donaldsebleung-com/
-debfiles/passwd etc/donaldsebleung-com/
-debfiles/keyalias etc/donaldsebleung-com/
-debfiles/donaldsebleung-com usr/bin/
-debfiles/donaldsebleung-com.service lib/systemd/system/
-debfiles/10-donaldsebleung-com.preset lib/systemd/system-preset/

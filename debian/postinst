@@ -1,3 +1,0 @@
-#!/bin/bash -e
-
-chmod 600 /etc/donaldsebleung-com/passwd
