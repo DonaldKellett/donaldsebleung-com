@@ -68,7 +68,7 @@ fi
 
 case $1 in
   get-version)
-    echo "0.2.6"
+    echo "0.2.7"
     exit
     ;;
   install-key)
